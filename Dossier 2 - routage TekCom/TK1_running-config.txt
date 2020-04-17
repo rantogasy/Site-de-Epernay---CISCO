@@ -1,0 +1,95 @@
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname TK1
+!
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial1/0
+ ip address 14.11.0.1 255.255.255.252
+!
+interface Serial1/1
+ ip address 14.12.0.1 255.255.255.252
+!
+interface Serial1/2
+ ip address 80.1.0.1 255.255.0.0
+!
+interface Serial1/3
+ ip address 100.1.3.1 255.255.255.0
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 10
+ log-adjacency-changes
+ network 100.1.3.0 0.0.0.255 area 0
+ network 80.1.0.0 0.0.255.255 area 0
+ network 14.11.0.0 0.0.0.3 area 1
+ network 14.12.0.0 0.0.0.3 area 1
+!
+router rip
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+

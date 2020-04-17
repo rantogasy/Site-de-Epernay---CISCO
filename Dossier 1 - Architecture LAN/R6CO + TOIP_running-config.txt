@@ -1,0 +1,165 @@
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+ip dhcp pool 10
+ network 10.6.10.0 255.255.255.0
+ default-router 10.6.1.254
+ip dhcp pool 20
+ network 10.6.20.0 255.255.255.0
+ default-router 10.6.1.254
+ip dhcp pool 30
+ network 10.6.30.0 255.255.255.0
+ default-router 10.6.1.254
+ip dhcp pool 40
+ network 10.6.40.0 255.255.255.0
+ default-router 10.6.1.254
+ip dhcp pool 200
+ network 10.6.200.0 255.255.255.0
+ default-router 10.6.1.254
+ option 150 ip 10.6.1.254
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 192.168.6.254 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ ip address 10.6.1.254 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1.2
+ no ip address
+!
+interface FastEthernet0/1.10
+ encapsulation dot1Q 10
+ ip address 10.6.10.254 255.255.255.0
+!
+interface FastEthernet0/1.20
+ encapsulation dot1Q 20
+ ip address 10.6.20.254 255.255.255.0
+!
+interface FastEthernet0/1.30
+ encapsulation dot1Q 30
+ ip address 10.6.30.254 255.255.255.0
+!
+interface FastEthernet0/1.40
+ encapsulation dot1Q 40
+ ip address 10.6.40.254 255.255.255.0
+!
+interface FastEthernet0/1.99
+ encapsulation dot1Q 99
+ ip address 10.6.99.254 255.255.255.0
+!
+interface FastEthernet0/1.100
+ encapsulation dot1Q 100
+ ip address 10.6.100.254 255.255.255.0
+!
+interface FastEthernet0/1.200
+ encapsulation dot1Q 200
+ ip address 10.6.200.254 255.255.255.0
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router rip
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+no cdp run
+!
+!
+!
+!
+!
+!
+telephony-service
+ max-ephones 4
+ max-dn 4
+ ip source-address 10.6.1.254 port 2000
+ auto assign 1 to 4
+!
+ephone-dn 1
+ number 101
+!
+ephone-dn 2
+ number 102
+!
+ephone-dn 3
+ number 103
+!
+ephone-dn 4
+ number 104
+!
+ephone 1
+ device-security-mode none
+ mac-address 000A.413C.9A9A
+ type 7960
+ button 1:2
+!
+ephone 2
+ device-security-mode none
+ mac-address 0002.4A4D.2C58
+ type 7960
+ button 1:3
+!
+ephone 3
+ device-security-mode none
+ mac-address 0001.42AC.ACA3
+ type 7960
+ button 1:4
+!
+ephone 4
+ device-security-mode none
+ mac-address 00D0.58B1.67A5
+ type 7960
+ button 1:1
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+
